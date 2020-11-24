@@ -4,9 +4,8 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const FriendlyErrorsWebpackPlugin = require("friendly-errors-webpack-plugin");
 const WebpackBar = require("webpackbar");
 
-const loadModeConfig = (env) => {
-  require(`./build-utils/${env.mode}.config`)(env);
-};
+const loadModeConfig = (env) =>
+  require(`./build-utils/${env.mode}.config.js`)(env);
 
 module.exports = (env) =>
   merge(
@@ -48,7 +47,11 @@ module.exports = (env) =>
           },
         ],
       },
-      plugins: [new CleanWebpackPlugin(), new FriendlyErrorsWebpackPlugin(), new WebpackBar()],
+      plugins: [
+        new CleanWebpackPlugin(),
+        new FriendlyErrorsWebpackPlugin(),
+        new WebpackBar(),
+      ],
     },
-    loadModeConfig(env)
+    loadModeConfig(env),
   );
